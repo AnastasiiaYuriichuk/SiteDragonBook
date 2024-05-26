@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ua">
+<head>
+  {% block head %}{% endblock %}
+</head>
+<body>
+ {% if success %}
+        <div class="alert alert-success">
+            {{ success }}
+        </div>
+    {% endif %}
+ {% if error %}
+        <div class="alert alert-danger">
+            {{ error }}
+        </div>
+    {% endif %}
+    <header class="header" id="header">
+    <div id="header-container">
+        <div class="container header__container">
+            <div class="header__nav">
+            <img    class="header__logo" src="{{url_for('static',filename='img/logo.png')}}" alt="logo" width="150" height="150">
+            <div class="header__nav">
+                <ul class="header__list">
+                    <li><a href="{{ url_for('index') }}">Каталог</a></li> <!--Вместо # вставить ссылки на странички-->
+                    <li><a href="#">Новинки</a></li>
+                    <li><a href="#">Про сайт</a></li>
+                    {% if role == 'user' %}
+                    <li><a href="/cart">Кошик</a></li>
+                    {% endif %}
+                    {% if role == 'admin' %}
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle">Адміністрування</a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{{ url_for('add_product') }}">Додати товар</a></li>
+                                    <li><a href="{{ url_for('add_new_admin') }}">Призначити адміністратора</a></li>
+                                    <li><a href="{{ url_for('admin_orders') }}">Обробка замовлень</a></li>
+                                </ul>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                    <ul class="btn__list-nav">
+                        {% if user %}
+                        {% block profil %}
+                        {% endblock %}
+                        {% block logaut %}
+                        {% endblock %}
+                           <!--  добавить в личный кабинет
+                           <li><a href="{{ url_for('logout') }}" class="btn-login" style="margin-top: 40px;">Вихід</a></li> -->
+                        {% else %}
+                            <li><a href="{{ url_for('login') }}" class="btn-login">Вхід</a></li>
+                        {% endif %}
+                    </ul>
+                    </div>
+            <div class="header__title-container">
+                <h1 class="header__title">Sapiens dominabitur astris</h1>
+                <p class="header__appeal">Мудрість панує над зірками</p>
+            </div>
+        </div>
+    </div>
+    </div>
+</header>
+
+{% block body %}{% endblock %}
+
+ <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__company">
+                    <img class="footer__logo" src="{{url_for('static',filename='img/logo.png')}}" alt="logo" width="150" height="150">
+                    <div class="footer__development">
+                        <p>© Book Dragon, 2024</p>
+                        <p>Design: Anastasia Yuriichuk</p>
+                    </div>
+                </div>
+                <div class="footer__nav">
+                    <div class="footer__column">
+                        <div class="footer__nav-catalog">  <!--Навигация. Повставлять ссылки (можно не заморачиваться и забить, давай признаем, всем абсолютно на все похуй)-->
+                            <h2><a href="html/index.html">Каталог</a></h2> <!--Кстати, сайт адаптивный (уже не оч), но кому на это не насрать-->
+                            <ul>
+                            <li><a href="#">Художня література</a></li>
+                            <li><a href="#">Дитяча література</a></li>
+                            <li><a href="#">Пізнавальна література</a></li>
+                            <li><a href="#">Дім та вдпочинок</a></li>
+                            <li><a href="#">Подарункові видання</a></li>
+                            <li><a href="#">Ігри</a></li>
+                            </ul>
+                        </div>
+                        <h2><a href="#">Новинки</a></h2>
+
+                        <h2><a href="#">Про сайт</a></h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+{% block drugoe %}{% endblock %}
+</body>
+</html>

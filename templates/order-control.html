@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+    {% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookDragon</title>
+    
+    <script type="text/javascript" src="static/js/jquery-3.7.1.js"></script>
+    <!--Иконки-->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{url_for('static',filename='img/icon/apple-touch-icon.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{url_for('static',filename='img/icon/favicon-32x32.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{url_for('static',filename='img/icon/favicon-16x16.png')}}">
+    <link rel="mask-icon" href="{url_for('static',filename='img/icon/safari-pinned-tab.svg')}}" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+
+     <!--Файлы стилей-->
+    <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
+     <link rel="stylesheet" href="{{url_for('static',filename='css/order-control.css')}}">
+     <link rel="stylesheet" href="{{url_for('static',filename='css/order-cart.css')}}">
+     <script src="static/js/elements.js" defer></script>
+ {% endblock %}
+{% block body %}
+<!-- Добавляем кнопки сортировки -->
+<div class="control__sort-container">
+    <div class="control__sort">
+        <form method="get">
+            <button type="submit" name="status" value="all">Усі</button>
+            <button type="submit" name="status" value="2">Сплачені</button>
+            <button type="submit" name="status" value="3">Комплектуються</button>
+            <button type="submit" name="status" value="4">Доставляються</button>
+            <button type="submit" name="status" value="5">Виконані</button>
+            <button type="submit" name="status" value="6">Скасовані</button>
+        </form>
+    </div>
+</div>
+<link rel="stylesheet" href="{{url_for('static',filename='css/but-status.css')}}">
+    <!--Управление заказами -->
+<main>
+    <div class="container control__container">
+        <div class="control__orders">
+            {% for order in orders %}
+            <div class="control__order-cart" style="margin-bottom: 25px; margin-left: 15px; margin-right: -20px;"> <!--Карточка заказа-->
+                <div class="order-cart__title">ID {{ order.order_id }}</div>
+                <ul class="order-cart__list">
+            {% for book in order.books %}
+                <li class="order-cart__item">
+                    <!-- Вывод информации о книге -->
+                    <img class="order-cart__image" src="{{ url_for('static', filename='img/books/' + book.img) }}" alt="{{ book.product_name }}">
+                    <div class="order-cart__product">
+                        <h3 class="order-cart__product-title">{{ book.product_name }}</h3>
+                        <p class="order-cart__product-author">{{ book.author }}</p>
+                    </div>
+                    <div class="order-cart__wrapper">
+                        <div class="order-cart__product-count count">
+                            <p class="count__amount">{{ book.quantity }}</p>
+                        </div>
+                        <p class="order-cart__product-price">{{ book.price }}<span class="currency">₴</span></p>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+                <div class="order-cart__control-wrapper">
+                    <select class="order-cart__select" id="status_{{ order.order_id }}">
+                        <option value="1" {% if order.status_id == 1 %}selected{% endif %}>Створено</option>
+                        <option value="2" {% if order.status_id == 2 %}selected{% endif %}>Оплачено</option>
+                        <option value="3" {% if order.status_id == 3 %}selected{% endif %}>Комплектується</option>
+                        <option value="4" {% if order.status_id == 4 %}selected{% endif %}>Доставляється</option>
+                        <option value="5" {% if order.status_id == 5 %}selected{% endif %}>Виконано</option>
+                        <option value="6" {% if order.status_id == 6 %}selected{% endif %}>Скасовано</option>
+                    </select>
+                    <button class="order-cart__select-btn" onclick="updateOrderStatus({{ order.order_id }})">Зберегти</button>
+                    <div class="order-cart__date">{{ order.order_date }}</div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</main>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function updateOrderStatus(orderId) {
+    $.ajax({
+        url: '/admin/update_order_status',
+        method: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            order_id: orderId,
+            status_id: $('#status_' + orderId).val() // Получаем новый статус из поля выбора
+        }),
+        success: function(response) {
+            if (response.success) {
+                // Если запрос успешен, перезагружаем страницу
+                location.reload();
+            } else {
+                // Если возникла ошибка, выводим сообщение
+                alert('Failed to update order status: ' + response.message);
+            }
+        },
+        error: function() {
+            alert('Failed to update order status');
+        }
+    });
+}
+
+</script>
+
+ {% endblock %}

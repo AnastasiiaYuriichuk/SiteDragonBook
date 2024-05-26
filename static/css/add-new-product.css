@@ -1,0 +1,240 @@
+.add_product{   
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.add-product__container{
+    min-width: calc(400px + var(--padding-container)*2);
+    display: flex;
+    flex-direction: column;
+}
+.add-product__title{
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 120%;
+    margin-bottom: 16px;
+}
+.add-product__inf-container{
+    display: grid; 
+    grid-auto-flow: row; 
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr; 
+    gap: 12px 8px; 
+    justify-items: stretch; 
+    align-items: stretch;
+    empty-cells: hide;
+}
+.add-product__img{
+    grid-area: 1 / 1 / 6 / 4;
+    min-width: 400px;
+    min-height: 550px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed #7F6D61;
+}
+.add-product__input-name{
+    grid-area: 1 / 4 / 2 / 7;
+}
+.add-product__input-author{
+    grid-area: 2 / 4 / 3 / 7;
+}
+.add-product__input-genre{
+    grid-area: 3 / 4 / 4 / 7; 
+}
+.add-product__input-page-count{
+    grid-area: 4 / 4 / 5 / 5; 
+}
+.add-product__input-category{
+    grid-area: 4 / 5 / 5 / 7;
+}
+.add-product__input-publisher{
+    grid-area: 5 / 4 / 6 / 6;
+}
+.add-product__input-publ-year{
+    grid-area: 5 / 6 / 6 / 7;  
+}
+
+.add-product__input-cover{
+    grid-area: 6 / 1 / 7 / 3;
+}
+.add-product__input-format{
+    grid-area: 6 / 3 / 7 / 5;
+}
+.add-product__input-language{
+    grid-area: 6 / 5 / 7 / 7; 
+}
+.add-product__input-amount{
+    grid-area: 7 / 1 / 7 / 3;
+}
+.add-product__input-isbn{
+    grid-area: 7 / 3 / 7 / 5;
+}
+.add-product__input-price{
+    grid-area: 7 / 5 / 7 / 7; 
+}
+.add-product__input-description{
+    grid-area: 8 / 1 / 8 / 7;
+}
+
+.hidden{
+    display: none !important;
+    
+}
+
+.border_none{
+    border: none;
+}
+
+.add-product__input{
+    width: 100%;
+    height: 70%;
+    border: 1px solid #f2f2f3;
+    border-radius: 8px;
+    padding: 4px 6px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 130%;
+    color:black;
+    outline-color:#74A3AB;
+}
+
+.add-product__input::placeholder{
+    color: #b1b1b1;
+}
+.add-product__input:focus-visible {
+    border-color: #2B5666 ;
+  }
+
+.add-product__select{
+    width: 100%;
+    height: 70%;
+    border: 1px solid #f2f2f3;
+    border-radius: 8px;
+    padding: 4px 6px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 130%;
+    color:black;
+    outline-color:#74A3AB;
+}
+.add-product__btn{
+    flex-grow: 1;
+    align-self: center;
+    padding: 9px;
+    background-color: #678D94;
+    border-radius: 8px;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 100%;
+    color: aliceblue;
+    width: 40%;
+    height: 40px;
+}
+.add-product__btn:hover{
+    background: #2d636d;
+}
+
+.add-product__btn:active{
+    transform: translateY(1px);
+    box-shadow: inset 0 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+
+.input-file-row {
+	display: inline-block;
+}
+.input-file-row span{
+    align-self: center;
+}
+.input-file {
+	position: relative;
+	display: inline-block;
+}
+.input-file span {
+	position: relative;
+	display: inline-block;
+	cursor: pointer;
+	outline: none;
+	text-decoration: none;
+	font-size: 14px;
+	vertical-align: middle;
+	text-align: center;
+	border-radius: 4px;
+    background-color: transparent;
+    border: 2px dashed #7F6D61;
+    color: #7F6D61;
+	line-height: 22px;
+	height: 40px;
+	padding: 10px 20px;
+	box-sizing: border-box;
+	margin: 0;
+	transition: background-color 0.2s;
+}
+.input-file input[type=file] {
+	position: absolute;
+	z-index: -1;
+	opacity: 0;
+	display: block;
+	width: 0;
+	height: 0;
+}
+ 
+/* Focus */
+.input-file input[type=file]:focus + span {
+	box-shadow: 0 0 0 0.2rem #c4b6a865;
+}
+ 
+/* Hover/active */
+.input-file:hover span {
+	background-color: #c4b6a8;
+    color: #42270b;
+}
+.input-file:active span {
+	background-color: #7F6D61;
+    color: #F3E7DB;
+    box-shadow: inset 0 5px 5px #1b0e01b4;
+}
+ 
+/* Disabled */
+.input-file input[type=file]:disabled + span {
+	background-color: #eee;
+}
+ 
+/* Список c превью */
+.input-file-list {
+	padding: 10px 0;
+}
+.input-file-list-item {
+	display: inline-block;
+	margin: 0 15px 15px;
+	width: 300px;
+	vertical-align: top;
+	position: relative;
+}
+.input-file-list-item img {
+	width: 100%;
+}
+.input-file-list-name {
+	text-align: center;
+	display: block;
+	font-size: 12px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+.input-file-list-remove {
+	color: #42270b;
+	text-decoration: none;
+	display: inline-block;
+	position: absolute;
+	padding: 0;
+	margin: 0;
+	top: 5px;
+	right: 5px;
+	background: #F3E7DB30;
+    border: 2px solid #42270b;
+	width: 20px;
+	height: 20px;
+	text-align: center;
+	line-height: 16px;
+	border-radius: 50%;
+}

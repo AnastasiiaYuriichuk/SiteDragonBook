@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookDragon</title>
+    
+    <script type="text/javascript" src="../js/jquery-3.7.1.js"></script>
+    <!--Иконки-->
+    <link rel="apple-touch-icon" sizes="180x180" href="../img/icon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../img/icon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../img/icon/favicon-16x16.png">
+    <link rel="mask-icon" href="../img/icon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+
+     <!--Файлы стилей-->
+    <link rel="stylesheet" href="../css/index.css">
+     <link rel="stylesheet" href="../css/edit-product.css">
+     <script src="../js/elements.js" defer></script>
+</head>
+<body>
+    <!--Шапка сайта-->
+    <div id="header"></div>
+    <!--Администрирование.Изменение информации о товаре -->
+    <!--Изначально в форму вставить те данные, которые уже есть (попробуй)-->
+<main>
+    <div class="edit_product">
+    <div class="container edit-product__container">
+    <h1 class="edit-product__title">Змінити інформацію</h1>
+    <form action="/edit_item" method="post" class="edit-product__form">
+        <div class="edit-product__inf-container">
+            <div class="add-product__img border_none">
+                <form method="post" enctype="multipart/form-data">
+                    <div class="input-file-row">
+                        <label class="input-file add-product__hidden hidden">
+                               <input type="file" name="img" multiple accept="image/*" required>		
+                               <span>Виберіть обкладинку</span>
+                         </label>
+                         <div class="input-file-list">'<div class="input-file-list-item">
+                            <img class="input-file-list-img" src="../img/books/book_10.jpg"> <!--Сюяда вставлять изначальный путь book.img-->
+                            <span class="input-file-list-name">book_10.png</span>
+                            <a href="#" onclick="removeFilesItem(this); return false;" class="input-file-list-remove">&#215;</a>
+                        </div>
+                    </div>  
+                    </div>
+                </form>
+            </div>
+                <input class="edit-product__input edit-product__input-name" type="text" name="name" placeholder="Назва тайтлу" required>
+                <input class="edit-product__input edit-product__input-author" type="text" name="author" placeholder="Автори" required>
+                <input class="edit-product__input edit-product__input-genre" type="text" name="genre" placeholder="Жанр" required>
+                <input class="edit-product__input edit-product__input-page-count" type="number" name="page_count" placeholder="Сторінки" required>
+            
+
+            <select class="edit-product__select edit-product__input-category" placeholder="Оберіть категорію" id="category" name="category" required>
+                <option value="fiction">Художня література</option>
+                <option value="children">Дитяча література</option>
+                <option value="tducational">Пізнавальна література</option>
+                <option value="home">Дім та відпочинок</option>
+                <option value="gift">Подарункові видання</option>
+                <option value="games">Ігри</option>
+            </select>
+            
+            <input class="edit-product__input edit-product__input-publisher" type="text" name="publisher" placeholder="Видавництво" required>
+            <input class="edit-product__input edit-product__input-publ-year" type="number" name="publication_year" placeholder="Рік видання" required>
+            
+                <select class="edit-product__select edit-product__input-cover" id="cover_type" name="cover_type" required>
+                    <option value="hardcover">Тверда обкладинка</option>
+                    <option value="paperback">М'яка обкладинка</option>
+                </select><br>
+            <input class="edit-product__input edit-product__input-format" type="text" name="format" placeholder="Формат" required>
+            <input class="edit-product__input edit-product__input-language" type="text" name="language" placeholder="Мова" required>
+
+            <input class="edit-product__input edit-product__input-amount" type="text" name="stock_amount" placeholder="Кількість" required>
+            <input class="edit-product__input edit-product__input-isbn" type="text" id="isbn" name="isbn" pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}-[0-9]{3}-[0-9]{1}" placeholder="ISBN" required>
+        </div>
+        
+        <button class="edit-product__btn" type="submit">Змінити</button>
+    </form>
+    </div>
+</div>
+</main>
+<!--Подвал-->
+<div id="footer"></div>
+
+<script src="../js/windows.js" defer></script>
+<script src="../js/upload_img.js" defer></script>
+</body>
+</html>

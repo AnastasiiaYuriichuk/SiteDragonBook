@@ -1,0 +1,48 @@
+.control__container{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 60px 150px;
+}
+.control__sort{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    margin-bottom: 12px;
+}
+.control__sort-title{
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 120%;
+    margin: 8px 4px;
+}
+.control__sort-buttons{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.control__sort-btn{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 100%;
+    margin: 2px 0 0 0;
+}
+
+.control__orders{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 300px);
+    gap: 10px;
+    align-items: start;
+}
+.control__order-cart{
+    padding: 5px 10px;
+    display:flex;
+    flex-direction: column;
+    background: #ffffff;
+    border-radius: 12px;
+    min-width: 275px;
+    text-align: left;
+    align-items: center;
+}

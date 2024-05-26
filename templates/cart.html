@@ -1,0 +1,170 @@
+{% extends 'base.html' %}
+{% block head %}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Кошик</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/count.css') }}">
+<script src="{{ url_for('static', filename='js/elements.js') }}"></script>
+<script type="text/javascript" src="static/js/jquery-3.7.1.js"></script>
+{% endblock %}
+
+                            {% block profil %}
+                            <li><a href="{{ url_for('profile') }}" class="text-login">
+                                <img src="{{ url_for('static', filename='img/profile-dragon.png') }}" alt="" class="profile-img">
+                                <div class="header__name">{{ user }}</div></a>
+                            </li>
+                         {% endblock %}
+
+{% block body %}
+<section class="cart-catalog">
+    <div class="cart-container">
+        <div class="cart-order order_open">
+            <section class="cart-wrapper">
+                <div class="cart-wrap-title" tabindex="0" role="button">
+                    <h2 class="cart-title">Кошик</h2>
+                    <span class="cart-count">{{ cart_products|length }}</span>
+                </div>
+                <div class="cart-wrap_list">
+                    <ul class="cart-list">
+                        {% for product in cart_products %}
+                        <li class="cart-item">
+                            <img class="cart-image" src="{{ url_for('static', filename='img/books/' + product['img']) }}" alt="{{ product['name'] }}">
+                            <div class="cart-product">
+                                <h3 class="cart-product-title">{{ product['name'] }}</h3>
+                                <p class="cart-product-author">{{ product['author'] }}</p>
+                            </div>
+                            <div class="cart-count-wrapper">
+                                <div class="cart-product-count count">
+                                    <form method="post" action="{{ url_for('update_cart') }}">
+                                        <input type="hidden" name="product_id" value="{{ product['id'] }}">
+                                        <button class="count_minus" type="submit" name="action" value="decrease">-</button>
+                                        <p class="count-amount">{{ product['quantity'] }}</p>
+                                        <button class="count_plus" type="submit" name="action" value="increase">+</button>
+                                    </form>
+                                </div>
+                                <p class="cart-product-price">{{ product['price'] }} <span class="currency">₴</span></p>
+                                <form method="post" action="{{ url_for('remove_from_cart') }}">
+                                    <input type="hidden" name="product_id" value="{{ product['id'] }}">
+                                    <button type="submit" class="cart-remove">Видалити</button>
+                                </form>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    <div class="cart-total">
+                        <p>Сума</p>
+                        <p><span class="cart-total-amount">{{ total_amount }}</span> <span class="currency">₴</span></p>
+                    </div>
+                    <button class="cart-submit" id="order-submit">Оформити замовлення</button>
+                </div>
+            </section>
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block drugoe %}
+<!--Оформление заказа и доставка -->
+<div class="modal modal_delivery ">
+    <div class="modal__main modal__main_D modal-delivery">
+        <div class="modal-delivery_wrapper">
+            <img src="{{url_for('static',filename='img/delivery-dragon.png')}}" alt="delivery-dragon" class="delivery-dragon">
+            <div class="modal-delivery__container">
+                <h2 class="modal-delivery__title">Оформлення замовлення</h2>
+                <form id="delivery-form" action="{{ url_for('place_order') }}" method="POST" class="modal-delivery__form">
+                    <fieldset class="modal-delivery__fieldset">
+                        <input class="modal-delivery__input" type="text" name="name" placeholder="Ваше ім'я та прізвище" required>
+                        <input class="modal-delivery__input" type="email" name="email" placeholder="Ел.пошта" required>
+                        <input class="modal-delivery__input" type="tel" name="phone" placeholder="Номер телефону" required>
+                    </fieldset>
+                    <fieldset class="modal-delivery__fieldset modal-delivery__fieldset_radio">
+                        <label class="modal-delivery__label"><input class="modal-delivery__radio" type="radio" name="format" value="pickup"><span>Самовивіз</span></label>
+                        <label class="modal-delivery__label"><input class="modal-delivery__radio" type="radio" name="format" value="delivery" checked="true"><span>Доставка</span></label>
+                    </fieldset>
+                    <fieldset class="modal-delivery__fieldset modal-delivery__change-hidden">
+                        <select class="modal-delivery__input modal-delivery__input_select" name="delivery-service">
+                            <option value="nova-poshta">Нова Пошта</option>
+                            <option value="ukrposhta">Укрпошта</option>
+                        </select>
+                        <input class="modal-delivery__input modal-delivery__input_select_delivery" type="text" name="city" placeholder="Місто">
+                        <input class="modal-delivery__input modal-delivery__input_select_delivery" type="number" name="office" placeholder="Номер відділення">
+                    </fieldset>
+                    <button id="check-order" class="modal-delivery__submit">Створити замовлення</button>
+                </form>
+            </div>
+            <button class="modal__close_D" type="button">
+                <svg width="29" height="30" viewBox="0 0 29 30" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="7.0752" y="8.28247" width="1" height="20" transform="rotate(-45 7.0752 8.28247)"/>
+                    <rect x="7.78271" y="22.4246" width="1" height="20" transform="rotate(-135 7.78271 22.4246)"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+// Функция для закрытия модального окна
+function closeModal() {
+    var modal = document.querySelector('.modal_delivery');
+    modal.style.display = 'none';
+}
+
+// Обработчик события для кнопки закрытия модального окна
+document.querySelector('.modal__close_D').addEventListener('click', function() {
+    closeModal(); // Вызываем функцию, которая закрывает модальное окно
+});
+
+document.getElementById('order-submit').addEventListener('click', function() {
+    fetch('/check_cart_availability', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({})
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Если товары доступны, открываем модальное окно для оформления заказа
+            document.querySelector('.modal_delivery').style.display = 'block';
+        } else {
+            alert('В нас не має стільки книжок: ' + data.products.map(p => `${p.name} (доступно: ${p.available}, ви хочете: ${p.requested})`).join(', '));
+        }
+    });
+});
+
+document.getElementById('check-order').addEventListener('click', function() {
+    fetch('/place_order', {
+        method: 'POST',
+        body: new FormData(document.getElementById('delivery-form'))
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Закрываем модальное окно
+            closeModal();
+            // Перенаправляем пользователя на страницу профиля
+            window.location.href = '/profile';
+        } else {
+            alert('Помилка при оформленні замовлення: ' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Помилка при оформленні замовлення:', error);
+    });
+});
+
+function closeModal() {
+    document.querySelector('.modal_delivery').style.display = 'none';
+}
+
+
+
+</script>
+
+{% endblock %}
+
+
+
+

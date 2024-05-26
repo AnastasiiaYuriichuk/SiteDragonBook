@@ -1,0 +1,15 @@
+<svg class ="logo" width="889" height="161" viewBox="0 0 889 161" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<rect y="0.629639" width="161" height="160" fill="url(#pattern0_1_256)"/>
+<defs>
+<pattern id="pattern0_1_256" patternContentUnits="objectBoundingBox" width="1" height="1">
+<use xlink:href="logo.png" width="501" height="498" transform="scale(0.00199601 0.00200848)"/>
+</pattern>
+</defs>
+</svg>
+
+
+<svg  class="header" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="1em" height="1em">
+  <circle cx="100" cy="100" r="100" fill="#678D94"/>
+</svg>
+
+

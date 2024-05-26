@@ -1,0 +1,28 @@
+.properties__title{
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 130%;
+    margin-bottom: 4px;
+}
+
+.properties__list{
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 130%;
+    margin-bottom: 4px;
+}
+
+.properties__item{
+    margin-bottom: 2px;
+}
+
+.properties__item:last-child{
+    margin-bottom: 0;
+}
+
+@media(min-width: 1024px){
+    .properties__title,
+    .properties__list{
+        font-size: 14px;
+    }
+}

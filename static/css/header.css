@@ -1,0 +1,227 @@
+.header{
+    background-image: url("data:image/svg+xml,%3Csvg class='header' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='100' fill='%23678D94'/%3E%3C/svg%3E");
+    background-size: 611px;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    padding: 24px 0 30px;
+    display: block;
+    justify-content: center;
+    margin-bottom: 40px;
+
+}
+.header__container {
+    width: 100%;
+    margin: 0 auto;
+  }
+.header__logo{
+    width: 100px;
+    /*margin: 0 auto 24px; АУТО - лого посередине margin-bottom:24px;*/
+    /*margin-bottom:24px;*/
+}
+
+.header__title-container{
+    text-align: center;
+    padding-bottom: 246px;
+    background: url('../img/header/big-dragon.svg') bottom/227px no-repeat;
+    color: aliceblue;
+    margin-top:24px;
+}
+.header__title{
+    font-family: 'Nova Script';
+    font-size: 30px;
+    line-height: 120%;
+    margin-bottom: 16px;
+}
+
+.header__appeal{
+    font-family: 'Old Standard TT';
+    font-style: italic;
+    font-size: 24px;
+    line-height: 22px;
+
+}
+.dropdown {
+    position: relative;
+  }
+  
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    min-width: 80px;
+    padding: 10px 10px;
+    margin: 5px 5px 5px -15px;
+    font-size: 14px;
+    text-align: left;
+    background-color: #5a7f86;
+    background-clip: padding-box;
+    border-radius: 7px;
+    transition: display 0.5s;
+
+  }
+  .dropdown-menu > li {
+    text-align: left;
+    margin: 2px !important;
+    padding: 4px;
+  }
+  
+  .dropdown-menu > li > a {
+    display: block;
+    padding: 3px 10px;
+    clear: both;
+    white-space: nowrap;
+    border-bottom: 1px solid #27272720;
+  }
+  .dropdown-menu > li > a :first-child{
+    padding: 3px;
+  }
+  .dropdown-menu > li > a :last-child{
+    border: 0px ;
+  }
+  .dropdown-menu > li > a:hover,
+  .dropdown-menu > li > a:focus {
+    text-decoration: none;
+    color: aliceblue;
+  }
+  
+  .dropdown:hover .dropdown-menu {
+    display: block;
+    transition: display 1s;
+  }
+  .dropdown-toggle{
+    padding-bottom: 5px;
+  }
+.header__nav{
+    
+    display: flex;
+    min-width: 50%;
+    align-items: center;
+    font-family: Nunito, sans-serif;
+    font-size: 16px;
+    justify-content: center;
+    background-color: #678D94;
+    flex-direction: column;
+}
+
+.header__list{
+    display: flex;
+    flex-direction:column;
+
+    align-items: center;
+    color: rgb(30, 44, 71);
+    padding: 0 20px;
+}
+.header__list li {
+    margin-top: 20px; /* increase the margin between items */
+    text-align: center;
+  }
+
+.header__list a:hover {
+    color: aliceblue;
+    cursor: pointer;
+  }
+.header__list a{
+    color: rgb(25, 47, 63);
+    border: 20px;
+}
+
+.btn__list-nav{
+    font-weight: 650;
+    line-height: 19px;
+    margin: 18px;
+}
+
+.btn-login{
+    color: #1e3e44;
+    background-color: #83bdc7;
+    border-radius: 13px;
+    padding: 10px 30px;
+
+}
+.btn-login:hover {
+    background-color: #bae2e9;
+    color: rgb(25, 47, 63);
+  }
+
+.btn-login:active {
+    transform: translateY(1px);
+    box-shadow: inset 0 5px 10px #0a505c50;
+}
+
+.text-login{
+    color: rgb(25, 47, 63);
+}
+
+.header__name{
+    font-style: italic;
+}
+.header__name:hover{
+    color:aliceblue;
+}
+
+.text-login{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.profile-img {
+    width: 60px;
+    background: #054E5960;
+    border-radius: 50%;
+    margin-bottom: 8px;
+    border:2px dashed #1e3e44;
+}
+.profile-img:hover{
+    background: #1e707c60;
+}
+
+@media(min-width: 480px){
+    .header{
+        background-size: 1400px;
+        padding-bottom: 44px;
+        
+    }
+
+    .header__container{
+        max-width: 480px;
+    }
+
+    .header__title-container{
+        padding-bottom: 0;
+        padding-left: 200px;
+        padding-top: 27px;
+        text-align: left;
+        background-position: left;
+        background-size: contain;
+        min-height: 190px;
+    }
+    .header__nav{       
+        justify-content: space-between;
+    }
+    .header__name{
+        display: inline;
+    }
+    .header__list{
+        display: flex;
+        flex-direction: row;
+        gap: 40px;
+    }
+}
+
+@media(min-width:768px){
+    .header{
+        background-size: 2540px;
+    }
+    .header__nav{       
+        background-color: none;
+        flex-direction:unset;
+    }
+    .header__container{
+        max-width: calc(562px + var(--padding-container)*2);
+    }
+    
+    .btn__list-nav{
+        margin: 0;
+    }
+}

@@ -1,0 +1,108 @@
+.order-cart__title{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 130%;
+    flex-grow: 0;
+    border-bottom: 1px solid #b1b1b1;
+    margin-bottom: 4px;
+    width: 100%;
+    padding: 4px;
+    text-align: center;
+}
+.order-cart__item{
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 0;
+    border-bottom: 1px solid #f2f2f3;
+}
+.order-cart__image{
+    width: 65px;
+    height: 100px;
+    border-radius: 3px;
+}
+.order-cart__product{
+    flex-grow: 1;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+}
+.order-cart__product-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    outline:none;
+}
+
+/*.order-cart__title-btn:active{
+    transform: translateY(1px);
+    box-shadow: inset 0 1px 2px #8b745d;
+}*/
+
+.order-cart__product-author{
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 130%;
+    margin-bottom: 7px;
+    color: #b1b1b1;
+}
+.order-cart__wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.order-cart__product-count{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 14px;
+    width: 32px;
+    height: 16px;
+    background: #f2f2f3;
+    border-radius: 6px;
+}
+.order-cart__product-price{
+    text-align: right;
+    padding: 40px 7px 0px 10px;
+}
+
+.order-cart__control-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: space-around;
+    align-items: center;
+    margin-top: 12px;
+    gap: 7px;
+}
+
+.order-cart__select{
+    border: 1px solid #f2f2f3;
+    border-radius: 8px;
+    padding: 4px;
+    font-size: 16px;
+    color:black;
+    outline-color:#74A3AB;
+}
+.order-cart__delivery{
+    font-style: italic;
+    font-size: 16px;
+}
+.order-cart__select-btn{
+    align-self: center;
+    padding: 6px 10px;
+    background-color: #678D94;
+    border-radius: 8px;
+    color: aliceblue;
+    
+}
+.order-cart__select-btn:hover{
+    background: #2d636d;
+}
+
+.order-cart__select-btn:active{
+    transform: translateY(1px);
+    box-shadow: inset 0 5px 10px rgba(0, 0, 0, 0.5);
+}

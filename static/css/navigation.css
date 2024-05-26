@@ -1,0 +1,121 @@
+.navigation{
+    margin-bottom: 30px;
+
+}
+
+.navigation__container{
+    padding: 0;
+    min-width: 100vw;
+}
+
+.navigation__list{
+    display: flex;
+    padding: 20px calc((100vw / 2) - (var(--container)/2));
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: 8px;
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
+}
+.navigation__list::-webkit-scrollbar {
+    display: none; /* Webkit browsers */
+  }
+
+.navigation__button{
+    background-color: #FFFFFF;
+    border-radius: 50px;
+    padding: 7px 8px 7px 40px;
+    font-size: 15px;
+    line-height: 16px;
+    white-space: nowrap;
+    background-repeat: no-repeat;
+    background-size: 24px;
+    background-position: 8px center;
+}
+
+.navigation__button:hover,
+.navigation__button:focus-visible{
+    outline: 2px solid #2B5666;
+    outline-offset: -2px;
+}
+@supports not selector(:focus-visible) {
+    .navigation__button:focus{
+        outline: 2px solid #2B5666;
+        outline-offset: -2px;
+    }
+}
+
+.navigation__button_active{
+    background-color: #74A3AB;
+    pointer-events: none;
+}
+
+.navigation__button_active:focus{
+    outline: none;
+}
+
+.navigation__button_fiction{
+    background-image: url('../img/navigation/fiction.png');
+}
+.navigation__button_children{
+    background-image: url('../img/navigation/children.png');
+}
+.navigation__button_cognitive{
+    background-image: url('../img/navigation/cognitive.png');
+}
+.navigation__button_home{
+    background-image: url('../img/navigation/home.png');
+}
+.navigation__button_gift{
+    background-image: url('../img/navigation/gift.png');
+}
+.navigation__button_games{
+    background-image: url('../img/navigation/games.png');
+}
+
+
+@media (min-width: 480px) {
+
+    .navigation{
+        --container: 80%;
+    }
+}
+@media (min-width: 768px) {
+    .navigation{
+        --container: 640px;
+    }
+    .navigation__list{
+        gap: 20px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .navigation{
+        margin-bottom: 50px;
+        --container: 960px;
+    }
+    .navigation__list{
+        gap: 24px;
+    }
+    
+    .navigation__button{
+        padding: 9px 14px 9px 46px;
+        font-size: 16px;
+        line-height: 16px;
+        background-size: 26px;
+        background-position: 14px center;
+    }
+}
+
+@media (min-width: 1360px) {
+    .navigation{
+        --container: 1290px;
+    }
+    .navigation__button{
+        padding: 12px 14px 12px 52px;
+        font-size: 16px;
+        line-height: 16px;
+        background-size: 30px;
+        background-position: 14px center;
+    }
+}

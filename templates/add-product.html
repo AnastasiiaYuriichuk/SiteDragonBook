@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+    {% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookDragon</title>
+    
+    <script type="text/javascript" src="static/js/jquery-3.7.1.js"></script>
+    <!--Иконки-->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{url_for('static',filename='img/icon/apple-touch-icon.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{url_for('static',filename='img/icon/favicon-32x32.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{url_for('static',filename='img/icon/favicon-16x16.png')}}">
+    <link rel="mask-icon" href="{url_for('static',filename='img/icon/safari-pinned-tab.svg')}}" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#00aba9">
+    <meta name="theme-color" content="#ffffff">
+
+     <!--Файлы стилей-->
+    <link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
+     <link rel="stylesheet" href="{{url_for('static',filename='css/add-new-product.css')}}">
+     <script src="static/js/elements.js" defer></script>
+   {% endblock %}
+{% block body %}
+    <!--Администрирование.Добавление товаров в каталог -->
+<main>
+    <div class="add_product">
+        <div class="container add-product__container">
+            <h1 class="add-product__title">Новий товар</h1>
+            <form action="/add_item" method="post" enctype="multipart/form-data" class="add-product__form">
+                <div class="add-product__inf-container">
+                    <div class="add-product__img">
+                        <label class="input-file add-product__hidden">
+                            <input type="file" name="img" accept="image/*" required>
+                            <span>Виберіть обкладинку</span>
+                        </label>
+                        <div class="input-file-list"></div>
+                    </div>
+                    <input class="add-product__input add-product__input-name" type="text" name="name" placeholder="Назва тайтлу" required>
+                    <input class="add-product__input add-product__input-author" type="text" name="author" placeholder="Автори" required>
+                    <input class="add-product__input add-product__input-genre" type="text" name="genre" placeholder="Жанр" required>
+                    <input class="add-product__input add-product__input-page-count" type="number" name="page_count" placeholder="Сторінки" required>
+
+                    <select class="add-product__select add-product__input-category" name="category" required>
+                        <option value="fiction">Художня література</option>
+                        <option value="children">Дитяча література</option>
+                        <option value="educational">Пізнавальна література</option>
+                        <option value="home">Дім та відпочинок</option>
+                        <option value="gift">Подарункові видання</option>
+                        <option value="games">Ігри</option>
+                    </select>
+
+                    <input class="add-product__input add-product__input-publisher" type="text" name="publisher" placeholder="Видавництво" required>
+                    <input class="add-product__input add-product__input-publ-year" type="date" name="publication_year" placeholder="Рік видання" required>
+
+                    <select class="add-product__select add-product__input-cover" name="cover_type" required>
+                        <option value="hardcover">Тверда обкладинка</option>
+                        <option value="paperback">М'яка обкладинка</option>
+                    </select><br>
+                    <input class="add-product__input add-product__input-format" type="text" name="format" placeholder="Формат" required>
+                    <input class="add-product__input add-product__input-language" type="text" name="language" placeholder="Мова" required>
+                    <input class="add-product__input add-product__input-amount" type="number" name="stock_amount" placeholder="Кількість" required>
+                    <input class="add-product__input add-product__input-isbn" type="number" name="isbn" placeholder="ISBN" required>
+                    <input class="add-product__input add-product__input-price" type="numder" name="price" placeholder="Ціна" required>
+                    <input class="add-product__input add-product__input-description" type="text" name="description" placeholder="Опис" required>
+                </div>
+
+                <button class="add-product__btn" type="submit">Створити</button>
+            </form>
+        </div>
+    </div>
+</main>
+
+ {% endblock %}
+{% block drugoe %}
+
+<script src="static/js/windows.js" defer></script>
+<script src="static/js/upload_img.js" defer></script>
+ {% endblock %}

@@ -1,0 +1,226 @@
+.new_admin{
+    
+    position: relative;
+    cursor: default;
+    margin: auto;
+    inset: 0;
+    --gap:8px;
+    width: 100%;
+    min-height: 100%;
+    padding: 32px 10px;
+    cursor: pointer;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+}
+.new-admin__container{
+    max-width: 300px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+.new-admin__title{
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 100%;
+    margin-bottom: 18px;
+    text-align: center;
+}
+
+.new-admin__container-search{
+    display:flex;
+    margin-bottom: 20px;
+
+}
+.new-admin__form{
+    display: block;
+    margin-right: 12px;
+}
+
+.new-admin__fieldset{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.new-admin__input{
+    width: 100%;
+    height: 50px;
+    border: 1px solid #f2f2f3;
+    border-radius: 8px;
+    padding: 4px 6px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 130%;
+    color:black;
+    outline-color:#74A3AB;
+}
+.new-admin__output{
+    cursor:default;
+    background-color: #fff;
+}
+
+.new-admin__hidden{
+    display: none;
+}
+
+.new-admin__input::placeholder{
+    color: #b1b1b1;
+}
+.new-admin__input:focus-visible {
+    border-color: #2B5666 ;
+  }
+
+.new-admin__label{
+    display: flex;
+    gap: 6px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 100%;
+    padding: 6px 4px 4px;
+}
+
+
+.new-admin__submit{
+    padding: 9px 12px;
+    background-color: #2B5666;
+    border-radius: 8px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 100%;
+    color: aliceblue;
+}
+.new-admin__submit:hover{
+    background: #2d636d;
+}
+
+.new-admin__submit:active{
+    transform: translateY(1px);
+    box-shadow: inset 0 5px 10px rgba(0, 0, 0, 0.5);
+}
+
+.new-admin__btn-admin{
+    border: solid 2px #437486;
+    background-color: #fff;
+    color: #437486;
+}
+.new-admin__btn-admin:hover{
+    border: solid 2px #143642;
+    background-color: #fff;
+    color: #143642;
+}
+
+.new-admin__btn-user{
+    border: solid 2px #BFA99A;
+    background-color: #fff;
+    color: #BFA99A;
+}
+.new-admin__btn-user:hover{
+    border: solid 2px #7F6D61;
+    background-color: #fff;
+    color: #7F6D61;
+}
+
+.new-admin__search{
+    width: 50%;
+}
+.new-admin__inf{
+    margin: 15px 10px 10px;
+}
+
+.new-admin__change{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 8px;
+}
+.admin-dragon{
+    display: none
+}
+
+@media(min-width:480px){
+    .new-admin{
+        max-width: 524px;
+        min-height: auto;
+        width: 100%;
+        padding: 30px 16px 29px;
+        box-shadow: 0px 0px 15px #00000010;
+        border-radius: 24px;
+    }
+    .new-admin__container{
+        max-width: unset;
+    }
+    .new-admin__input_select{
+        width: 70%;
+        margin-right: 20%;
+    }
+    .new-admin__input_select_delivery{
+        width: 40%;
+    }
+    .new-admin__container{
+        max-width: unset;
+    }
+}
+
+@media(min-width:1024px){
+    .new-admin_wrapper{
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        align-content: space-around;
+        flex-direction: row;
+    }
+    .new-admin{
+        max-width: 971px;
+    }
+    .new-admin{
+        padding: 0;
+    }
+    .new-admin__container{
+        margin: 37px ;
+
+    }
+    .new-admin__fields{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+    .admin-dragon{
+        display:block;
+        width: 50%;
+        background-color: #F3E7DB;
+        border-radius: 24px 0px 0px 24px;
+    }
+    .new-admin__fieldset{
+        gap:11px;
+    }
+    
+    .new-admin__input_select_delivery{
+        width: 60%;
+        margin-right: 30%;
+    }
+
+    .new-admin__title{
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 100%;
+    }
+    .new-admin__submit{
+        width: 200px;
+        height: 50px;
+        font-weight: 200;
+        font-size: 16px;
+        line-height: 100%;
+        align-self: center;
+        margin-top: 10px;
+    }
+    .new-admin__search{
+        margin: 0;
+        width: 120px;
+        height: 35px;
+    }
+
+}

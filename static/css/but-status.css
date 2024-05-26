@@ -1,0 +1,21 @@
+.control__sort-container {
+    text-align: center; /* Выравниваем содержимое по центру */
+}
+
+.control__sort {
+    display: inline-block; /* Делаем контейнер блочным элементом */
+}
+
+.control__sort button {
+    margin-right: 10px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #678D94;
+    color: #fff;
+    cursor: pointer;
+}
+
+.control__sort button:hover {
+    background-color: #2d636d;
+}
