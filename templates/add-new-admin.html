@@ -27,57 +27,103 @@
                          {% endblock %}
 
 {% block body %}
-    <!--Администрирование.Назначить админа -->
 <main>
     <div class="new_admin new_open ">
-    <div class="new__main new-admin">
-        <div class="new-admin_wrapper">
-        <img src="static/img/admin-dragon.png" alt="admin-dragon" class="admin-dragon">
-        <div class="new-admin__container">
-            <h2 class="new-admin__title">Призначити адміністратора</h2>
-            <div class="new-admin__container-search">
-            <form id="admin" action="" class="new-admin__form"> <!--Форма для заполнения данных, получаешь отсюда айдишник или username-->
-                <fieldset class="new-admin__fieldset">
-                    <input class="new-admin__input" type="text" name="id" placeholder="ID or Username">
-                </fieldset>
-            </form> 
-            <button class="new-admin__submit new-admin__search" type="submit" form="admin">Знайти</button>
-        </div>
-        <!--Если пользователь не найден, здесь убрать new-admin__hidden-->
-        <p class="new-admin__empty new-admin__hidden">Користувача не знайдено.</p>
-        <!--Если пользователь найден, здесь убрать new-admin__hidden-->
-        <div class="new-admin__inf-div new-admin__hidden">
-            <!-- Вывод информации о пользователе -->
-                <div class="new-admin__inf ">
-                    <h2 class="new-admin__title">Інформація про користувача</h2>
-                    <div class="new-admin__fields">
-                        <div class="new-admin__field">
-                            <label for="id" class="new-admin__label">ID</label>
-                            <input id="id" class="new-admin__input new-admin__output" type="text" name="id" disabled readonly>
+        <div class="new__main new-admin">
+            <div class="new-admin_wrapper">
+                <img src="static/img/admin-dragon.png" alt="admin-dragon" class="admin-dragon">
+                <div class="new-admin__container">
+                    <h2 class="new-admin__title">Призначити адміністратора</h2>
+                    <div class="new-admin__container-search">
+                        <form id="admin" action="/search-user" method="post" class="new-admin__form">
+                            <fieldset class="new-admin__fieldset">
+                                <input class="new-admin__input" type="text" name="id_or_username" placeholder="ID or Username">
+                            </fieldset>
+                        </form>
+                        <button class="new-admin__submit new-admin__search" type="submit" form="admin">Знайти</button>
+                    </div>
+                    <p class="new-admin__empty new-admin__hidden">Користувача не знайдено.</p>
+                    <div class="new-admin__inf-div new-admin__hidden">
+                        <div class="new-admin__inf">
+                            <h2 class="new-admin__title">Інформація про користувача</h2>
+                            <div class="new-admin__fields">
+                                <div class="new-admin__field">
+                                    <label for="id" class="new-admin__label">ID</label>
+                                    <input id="id" class="new-admin__input new-admin__output" type="text" name="id" disabled readonly>
+                                </div>
+                                <div class="new-admin__field">
+                                    <label for="username" class="new-admin__label">Username</label>
+                                    <input id="username" class="new-admin__input new-admin__output" type="text" name="username" disabled readonly>
+                                </div>
+                                <div class="new-admin__field">
+                                    <label for="email" class="new-admin__label">Email</label>
+                                    <input id="email" class="new-admin__input new-admin__output" type="email" name="email" disabled readonly>
+                                </div>
+                                <div class="new-admin__field">
+                                    <label for="role" class="new-admin__label">Роль</label>
+                                    <input id="role" class="new-admin__input new-admin__output" type="text" name="role" disabled readonly>
+                                </div>
+                            </div>
                         </div>
-                        <div class="new-admin__field">
-                            <label for="username" class="new-admin__label">Username</label>
-                            <input id="username" class="new-admin__input new-admin__output" type="text" name="username" disabled readonly>
-                        </div>
-                        <div class="new-admin__field">
-                            <label for="email" class="new-admin__label">Email</label>
-                            <input id="email" class="new-admin__input new-admin__output" type="email" name="email" disabled readonly>
-                        </div>
-                        <div class="new-admin__field">
-                            <label for="role" class="new-admin__label">Роль</label>
-                            <input id="role" class="new-admin__input new-admin__output" type="text" name="role" disabled readonly>
+                        <div class="new-admin__change">
+                            <form id="change-role-form" method="post" action="">
+                                <button class="new-admin__submit new-admin__btn-admin" type="submit" name="role" value="admin">Призначити адміністратором</button>
+                                <button class="new-admin__submit new-admin__btn-user" type="submit" name="role" value="user">Призначити користувачем</button>
+                                <input type="hidden" name="user_id" id="hidden_user_id">
+                            </form>
                         </div>
                     </div>
-                </div>
-                <div class="new-admin__change">
-                    <button class="new-admin__submit new-admin__btn-admin" type="submit" >Призначити адміністратором</button>
-                    <button class="new-admin__submit new-admin__btn-user"  type="submit" >Призначити користувачем</button>
                 </div>
             </div>
         </div>
     </div>
-    </div>
-</div>
 </main>
 <script src="static/js/windows.js" defer></script>
+<script>
+    document.getElementById('admin').onsubmit = async function (event) {
+        event.preventDefault();
+        const formData = new FormData(this);
+        const response = await fetch(this.action, {
+            method: 'POST',
+            body: formData
+        });
+        const result = await response.json();
+        if (result.success) {
+            document.querySelector('.new-admin__inf-div').classList.remove('new-admin__hidden');
+            document.querySelector('.new-admin__empty').classList.add('new-admin__hidden');
+            document.getElementById('id').value = result.user.id;
+            document.getElementById('username').value = result.user.username;
+            document.getElementById('email').value = result.user.email;
+            document.getElementById('role').value = result.user.role;
+            document.getElementById('hidden_user_id').value = result.user.id;
+        } else {
+            document.querySelector('.new-admin__inf-div').classList.add('new-admin__hidden');
+            document.querySelector('.new-admin__empty').classList.remove('new-admin__hidden');
+        }
+    };
+
+    document.querySelectorAll('.new-admin__change button').forEach(button => {
+        button.onclick = function (event) {
+            event.preventDefault();
+            const role = this.value;
+            const userId = document.getElementById('hidden_user_id').value;
+            fetch('/change-role', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ user_id: userId, role: role })
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.success) {
+                    alert('Роль успешно изменена!');
+                } else {
+                    alert('Ошибка при изменении роли.');
+                }
+            });
+        }
+    });
+</script>
 {% endblock %}
+

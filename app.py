@@ -309,15 +309,15 @@ def login():
     return render_template('login.html')
 
 
-@app.route('/admin_dashboard')
-@login_required('admin')
-def admin_dashboard():
-    return render_template('index.html', user=session.get('username'), role=session.get('role'))
+#@app.route('/admin_dashboard')
+#@login_required('admin')
+#def admin_dashboard():
+#   return render_template('index.html', user=session.get('username'), role=session.get('role'))
 
-@app.route('/user_dashboard')
-@login_required('user')
-def user_dashboard():
-    return render_template('index.html', user=session.get('username'), role=session.get('role'))
+#@app.route('/user_dashboard')
+#@login_required('user')
+#def user_dashboard():
+#   return render_template('index.html', user=session.get('username'), role=session.get('role'))
 
 #@app.route('/unauthorized')
 #def unauthorized():
@@ -377,6 +377,37 @@ def add_item():
 @app.route('/add-new-admin')
 def add_new_admin():
     return render_template("add-new-admin.html")
+
+@app.route('/search-user', methods=['POST'])
+def search_user():
+    id_or_username = request.form.get('id_or_username')
+    connection = get_db_connection()
+    try:
+        with connection.cursor() as cursor:
+            sql = "SELECT id, username, email, role FROM users WHERE id = %s OR username = %s"
+            cursor.execute(sql, (id_or_username, id_or_username))
+            user = cursor.fetchone()
+            if user:
+                return jsonify(success=True, user=user)
+            else:
+                return jsonify(success=False)
+    finally:
+        connection.close()
+
+@app.route('/change-role', methods=['POST'])
+def change_role():
+    data = request.get_json()
+    user_id = data['user_id']
+    new_role = data['role']
+    connection = get_db_connection()
+    try:
+        with connection.cursor() as cursor:
+            sql = "UPDATE users SET role = %s WHERE id = %s"
+            cursor.execute(sql, (new_role, user_id))
+        connection.commit()
+        return jsonify(success=True)
+    finally:
+        connection.close()
 
 
 @app.route('/profile')
