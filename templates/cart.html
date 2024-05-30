@@ -102,19 +102,8 @@
         </div>
     </div>
 </div>
-
+<!-- cart.html -->
 <script>
-// Функция для закрытия модального окна
-function closeModal() {
-    var modal = document.querySelector('.modal_delivery');
-    modal.style.display = 'none';
-}
-
-// Обработчик события для кнопки закрытия модального окна
-document.querySelector('.modal__close_D').addEventListener('click', function() {
-    closeModal(); // Вызываем функцию, которая закрывает модальное окно
-});
-
 document.getElementById('order-submit').addEventListener('click', function() {
     fetch('/check_cart_availability', {
         method: 'POST',
@@ -144,8 +133,8 @@ document.getElementById('check-order').addEventListener('click', function() {
         if (data.success) {
             // Закрываем модальное окно
             closeModal();
-            // Перенаправляем пользователя на страницу профиля
-            window.location.href = '/profile';
+            // Перенаправляем пользователя на страницу подтверждения заказа
+            window.location.href = data.redirect_url;
         } else {
             alert('Помилка при оформленні замовлення: ' + data.message);
         }
@@ -158,9 +147,6 @@ document.getElementById('check-order').addEventListener('click', function() {
 function closeModal() {
     document.querySelector('.modal_delivery').style.display = 'none';
 }
-
-
-
 </script>
 
 {% endblock %}

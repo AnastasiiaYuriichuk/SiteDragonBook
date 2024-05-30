@@ -1,6 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+{% extends 'base.html' %}
+    {% block head %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BookDragon</title>
@@ -18,22 +17,16 @@
     <link rel="stylesheet" href="static/css/index.css">
     <link rel="stylesheet" href="static/css/ordered.css">
      <script src="static/js/elements.js" defer></script>
-</head>
-<body>
-    <!--Шапка сайта-->
-    <div id="header"></div>
-    <!--Личный кабинет -->
+{% endblock %}
+{% block body %}
 <main>
     <div class="ordered__container">
         <img src="static/img/ordered-dragon.png" alt="" class="ordered__img">
         <div class="ordered__text">Дякуюємо за замовлення! Ви можете оплатити його в особистому кабінеті.</div>
         <div class="ordered__buttons">
-            <a class="ordered__btn ordered__btn-catalog" href="index.html">Продовжити покупки</a>
-            <a class="ordered__btn ordered__btn-profile" href="profile.html">Особистий кабінет</a>
+            <a class="ordered__btn ordered__btn-catalog" href="/home">Продовжити покупки</a>
+            <a class="ordered__btn ordered__btn-profile" href="/profile">Особистий кабінет</a>
         </div>
     </div>
 </main>
-<!--Подвал-->
-<div id="footer"></div>
-</body>
-</html>
+{% endblock %}

@@ -173,19 +173,9 @@
                     {% if role == 'admin' %}
                     <button class="modal-product__btn modal-product__change"><a href="edit-product.html">Змінити</a></button><!--Только для администраторов-->
                     {% endif %}
-                    <!--<div class="modal-product__count count">
-                        <button class="count_minus">-</button>
-                        <p class="count__amount">1</p>
-                        <button class="count_plus">+</button>
-                    </div>-->
-
-                    <!--<button class="modal-product__btn">Додати до кошика</button>-->
-                    {% for product in products %}
-                    <form method="post" action="{{ url_for('add_to_cart', product_id=product['id']) }}">
-                    <button class="modal-product__btn" type="submit">Додати до кошика</button> <!-- Кнопка добавления в корзину -->
-                   </form>
-                    {% endfor %}
-                     <!--Кнопка добавления в корзину-->
+                    <form id="addToCartForm" method="post">
+                        <button class="modal-product__btn" type="submit">Додати до кошика</button> <!-- Кнопка добавления в корзину -->
+                    </form>
                 </div>
             </div>
         </div>
@@ -216,6 +206,11 @@ function openModal(productId) {
             document.getElementById('modalISBN').textContent = data.isbn;
             document.getElementById('modalLanguage').textContent = data.language;
             document.getElementById('modalPrice').textContent = data.price + ' ₴';
+
+            // Обновляем форму добавления в корзину
+            const addToCartForm = document.getElementById('addToCartForm');
+            addToCartForm.action = `/add_to_cart/${productId}`;
+
             document.getElementById('productModal').style.display = 'block';
         });
 }
@@ -224,6 +219,7 @@ function closeModal() {
     document.getElementById('productModal').style.display = 'none';
 }
 </script>
+
 
 <!--Оформление заказа и доставка -->
 <div class="modal modal_delivery ">

@@ -28,7 +28,7 @@
 
 {% block body %}
 <main>
-    <div class="new_admin new_open ">
+    <div class="new_admin new_open">
         <div class="new__main new-admin">
             <div class="new-admin_wrapper">
                 <img src="static/img/admin-dragon.png" alt="admin-dragon" class="admin-dragon">
@@ -37,10 +37,10 @@
                     <div class="new-admin__container-search">
                         <form id="admin" action="/search-user" method="post" class="new-admin__form">
                             <fieldset class="new-admin__fieldset">
-                                <input class="new-admin__input" type="text" name="id_or_username" placeholder="ID or Username">
+                                <input class="new-admin__input" type="text" name="id_or_username" placeholder="ID or login">
                             </fieldset>
                         </form>
-                        <button class="new-admin__submit new-admin__search" type="submit" form="admin">Знайти</button>
+                        <button class="new-admin__submit new-admin__search" type="button" id="search-button">Знайти</button>
                     </div>
                     <p class="new-admin__empty new-admin__hidden">Користувача не знайдено.</p>
                     <div class="new-admin__inf-div new-admin__hidden">
@@ -52,8 +52,8 @@
                                     <input id="id" class="new-admin__input new-admin__output" type="text" name="id" disabled readonly>
                                 </div>
                                 <div class="new-admin__field">
-                                    <label for="username" class="new-admin__label">Username</label>
-                                    <input id="username" class="new-admin__input new-admin__output" type="text" name="username" disabled readonly>
+                                    <label for="login" class="new-admin__label">Login</label>
+                                    <input id="login" class="new-admin__input new-admin__output" type="text" name="login" disabled readonly>
                                 </div>
                                 <div class="new-admin__field">
                                     <label for="email" class="new-admin__label">Email</label>
@@ -66,11 +66,9 @@
                             </div>
                         </div>
                         <div class="new-admin__change">
-                            <form id="change-role-form" method="post" action="">
-                                <button class="new-admin__submit new-admin__btn-admin" type="submit" name="role" value="admin">Призначити адміністратором</button>
-                                <button class="new-admin__submit new-admin__btn-user" type="submit" name="role" value="user">Призначити користувачем</button>
-                                <input type="hidden" name="user_id" id="hidden_user_id">
-                            </form>
+                            <button class="new-admin__submit new-admin__btn-admin" type="button" id="set-admin-button">Призначити адміністратором</button>
+                            <button class="new-admin__submit new-admin__btn-user" type="button" id="set-user-button">Призначити користувачем</button>
+                            <input type="hidden" name="user_id" id="hidden_user_id">
                         </div>
                     </div>
                 </div>
@@ -78,12 +76,11 @@
         </div>
     </div>
 </main>
-<script src="static/js/windows.js" defer></script>
 <script>
-    document.getElementById('admin').onsubmit = async function (event) {
-        event.preventDefault();
-        const formData = new FormData(this);
-        const response = await fetch(this.action, {
+    document.getElementById('search-button').onclick = async function () {
+        const form = document.getElementById('admin');
+        const formData = new FormData(form);
+        const response = await fetch('/search-user', {
             method: 'POST',
             body: formData
         });
@@ -92,7 +89,7 @@
             document.querySelector('.new-admin__inf-div').classList.remove('new-admin__hidden');
             document.querySelector('.new-admin__empty').classList.add('new-admin__hidden');
             document.getElementById('id').value = result.user.id;
-            document.getElementById('username').value = result.user.username;
+            document.getElementById('login').value = result.user.login;
             document.getElementById('email').value = result.user.email;
             document.getElementById('role').value = result.user.role;
             document.getElementById('hidden_user_id').value = result.user.id;
@@ -102,28 +99,41 @@
         }
     };
 
-    document.querySelectorAll('.new-admin__change button').forEach(button => {
-        button.onclick = function (event) {
-            event.preventDefault();
-            const role = this.value;
-            const userId = document.getElementById('hidden_user_id').value;
-            fetch('/change-role', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ user_id: userId, role: role })
-            })
-            .then(response => response.json())
-            .then(result => {
-                if (result.success) {
-                    alert('Роль успешно изменена!');
-                } else {
-                    alert('Ошибка при изменении роли.');
-                }
-            });
+    document.getElementById('set-admin-button').onclick = async function () {
+        const userId = document.getElementById('hidden_user_id').value;
+        const response = await fetch('/change-role', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ user_id: userId, role: 'admin' })
+        });
+        const result = await response.json();
+        if (result.success) {
+            alert('Роль успішно змінена на адміністратора!');
+        } else {
+            alert('Помилка при зміні ролі.');
         }
-    });
+    };
+
+    document.getElementById('set-user-button').onclick = async function () {
+        const userId = document.getElementById('hidden_user_id').value;
+        const response = await fetch('/change-role', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ user_id: userId, role: 'user' })
+        });
+        const result = await response.json();
+        if (result.success) {
+            alert('Роль успішно змінена на користувача!');
+        } else {
+            alert('Помилка при зміні ролі.');
+        }
+    };
 </script>
+<script src="static/js/windows.js" defer></script>
 {% endblock %}
+
 

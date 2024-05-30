@@ -237,7 +237,7 @@ def place_order():
 
         connection.commit()
         session.pop('cart', None)
-        return jsonify(success=True, message='Замовлення успішно оформлено!', order_id=order_id)
+        return jsonify(success=True, redirect_url=url_for('ordered'))
     finally:
         connection.close()
 
@@ -384,7 +384,7 @@ def search_user():
     connection = get_db_connection()
     try:
         with connection.cursor() as cursor:
-            sql = "SELECT id, username, email, role FROM users WHERE id = %s OR username = %s"
+            sql = "SELECT id, login, email, role FROM client WHERE id = %s OR login = %s"
             cursor.execute(sql, (id_or_username, id_or_username))
             user = cursor.fetchone()
             if user:
@@ -402,7 +402,7 @@ def change_role():
     connection = get_db_connection()
     try:
         with connection.cursor() as cursor:
-            sql = "UPDATE users SET role = %s WHERE id = %s"
+            sql = "UPDATE client SET role = %s WHERE id = %s"
             cursor.execute(sql, (new_role, user_id))
         connection.commit()
         return jsonify(success=True)
@@ -556,8 +556,6 @@ def admin_orders():
     return render_template("order-control.html", orders=orders)
 
 
-
-
 # Маршрут для обновления статуса заказа администратором
 @app.route('/admin/update_order_status', methods=['POST'])
 def update_order_status():
@@ -580,7 +578,9 @@ def update_order_status():
     finally:
         connection.close()
 
-
+@app.route('/ordered')
+def ordered():
+    return render_template("ordered.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
