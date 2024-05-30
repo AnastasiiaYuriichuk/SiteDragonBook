@@ -36,22 +36,22 @@
                     <ul class="navigation__list">
                         <!--Если секция выбрана, присвоить ей класс navigation__button_active-->
                         <li class="navigation__item">
-                            <button type="submit" name="category" value="fiction" class="navigation__button {% if category == 'fiction' %}navigation__button_active{% endif %}">Художня література</button>
+                            <button type="submit" name="category" value="fiction" class="navigation__button navigation__button_fiction {% if category == 'fiction' %}navigation__button_active{% endif %}">Художня література</button>
                         </li>
                         <li class="navigation__item">
-                            <button type="submit" name="category" value="children" class="navigation__button {% if category == 'children' %}navigation__button_active{% endif %}">Дитяча література</button>
+                            <button type="submit" name="category" value="children" class="navigation__button navigation__button_children {% if category == 'children' %}navigation__button_active{% endif %}">Дитяча література</button>
                         </li>
                         <li class="navigation__item">
-                            <button type="submit" name="category" value="educational" class="navigation__button {% if category == 'educational' %}navigation__button_active{% endif %}">Пізнавальна література</button>
+                            <button type="submit" name="category" value="educational" class="navigation__button navigation__button_cognitive {% if category == 'educational' %}navigation__button_active{% endif %}">Пізнавальна література</button>
                         </li>
                         <li class="navigation__item">
-                            <button type="submit" name="category" value="home" class="navigation__button {% if category == 'home' %}navigation__button_active{% endif %}">Дім та відпочинок</button>
+                            <button type="submit" name="category" value="home" class="navigation__button navigation__button_home {% if category == 'home' %}navigation__button_active{% endif %}">Дім та відпочинок</button>
                         </li>
                         <li class="navigation__item">
-                            <button type="submit" name="category" value="gift" class="navigation__button {% if category == 'gift' %}navigation__button_active{% endif %}">Подарункові видання</button>
+                            <button type="submit" name="category" value="gift" class="navigation__button navigation__button_gift {% if category == 'gift' %}navigation__button_active{% endif %}">Подарункові видання</button>
                         </li>
                         <li class="navigation__item">
-                            <button type="submit" name="category" value="games" class="navigation__button {% if category == 'games' %}navigation__button_active{% endif %}">Ігри</button>
+                            <button type="submit" name="category" value="games" class="navigation__button navigation__button_games {% if category == 'games' %}navigation__button_active{% endif %}">Ігри</button>
                         </li>
                     </ul>
                 </form>

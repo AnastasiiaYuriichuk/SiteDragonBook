@@ -18,6 +18,14 @@
      <link rel="stylesheet" href="{{url_for('static',filename='css/add-new-admin.css')}}">
      <script src="static/js/elements.js" defer></script>
  {% endblock %}
+
+                         {% block profil %}
+                            <li><a href="{{ url_for('profile') }}" class="text-login">
+                                <img src="{{ url_for('static', filename='img/profile-dragon.png') }}" alt="" class="profile-img">
+                                <div class="header__name">{{ user }}</div></a>
+                            </li>
+                         {% endblock %}
+
 {% block body %}
     <!--Администрирование.Назначить админа -->
 <main>

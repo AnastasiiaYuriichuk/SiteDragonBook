@@ -41,7 +41,7 @@ def index():
     finally:
         connection.close()
 
-    return render_template('index.html', products=products, category=category)
+    return render_template('index.html', products=products, category=category, user=session.get('username'), role=session.get('role'))
 
 
 @app.route('/add_to_cart/<int:product_id>', methods=['POST'])
@@ -299,9 +299,9 @@ def login():
                     session['user_id'] = user['id']
                     session['cart'] = []
                     if user['role'] == 'admin':
-                        return redirect(url_for('admin_dashboard'))
+                        return redirect(url_for('index'))
                     elif user['role'] == 'user':
-                        return redirect(url_for('user_dashboard'))
+                        return redirect(url_for('index'))
                 else:
                     return "Invalid credentials"
         finally:
