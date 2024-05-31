@@ -27,8 +27,6 @@ def get_db_connection():
         print(f"Ошибка при подключении к базе данных: {e}")
         return None
 
-
-
 @app.route('/')
 @app.route('/home')
 def index():
