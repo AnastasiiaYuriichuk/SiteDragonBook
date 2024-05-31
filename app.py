@@ -12,6 +12,7 @@ app.config['MYSQL_DB'] = 'dragondb'
 app.secret_key = '12vl34ad'
 
 
+
 def get_db_connection():
     try:
         connection = pymysql.connect(
