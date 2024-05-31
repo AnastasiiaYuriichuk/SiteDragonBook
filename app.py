@@ -28,6 +28,7 @@ def get_db_connection():
         return None
 
 
+
 @app.route('/')
 @app.route('/home')
 def index():
